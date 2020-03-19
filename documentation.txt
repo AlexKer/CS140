@@ -8,23 +8,29 @@ dp[i]=(height of block i) otherwise i.e. no blocks can be stacked below block i 
 
 The algorithm implemented is a dynamic programming solution very similar to the longest increasing subsequence,
 but instead of checking the increasing condition, we ensure that the two dimension of the block on top is greater than the one below.
+
+A class named Block is created for ease of storing the length, width, height, area of the base for each type of block.
+This class implements the Comparable interface for the sorting step that will be described below.
 First, we enumerate 3 orientation of a given type of block, that is, using each of the three dimensions as height once.
 The  smaller of the two dimensions left is used as the length, and the bigger one used as width. This is needed later when
 determining if one block can be validly stacked on top of another (we compare the smaller dim with the smaller dim) and
 used for the output where the block need to have the smaller of the two dimensions first and the height last.
+
 We then sort the blocks in descending order of base area or the ones with the largest bases first. We do so 
 because later we fill in the dp table from 0->n, i.e. we stack blocks from bottom to top. The next step is to fill
 an array named prev with -1, where prev[i] is the index of the block immediately below the ith block. If an entry in the prev
 array is unchanged/-1, we know that that must be the base block of a stack. prev will be used to trace the optimal stack.
-Then, we fill in the dynamic table of size n (n is all types, including its three orientations) from i:0->3*n. 
+
+Then, we fill in the dynamic table of size n (n is all types, including its three orientations) from i:0->n. 
 dp[i] represents the optimal/max height with the ith block as the top block. In the inner loop, we examine all blocks 
-j:0->i with length greater than the length of i and width greater than the  width of i; these are all the possible blocks j that can come below i.
+j:0->i with length greater than the length of i and width greater than the width of i; these are all the possible blocks j that can come below i.
 A max local variable is updated to hold max dp[j] for 0<=j<i, or the greatest height of the stack that can be stacked below block i.
-Finally, we set dp[i] as max+height of block i. Now to compute the max height, we loop through the dynamic table, and 
-find the max value of stack ending on each possible type of block. We take note of the idx of the block on top for the backtrace.
-An ArrayList is created so we can build store the order of the optimal stack from bottom to top. A while loop is ran until prev[idx]==-1,
-or the bottom of the stack is reached (there is no block before that one). We find the block below the top block by looking at prev[idx],
-and the block below the second highest block by looking at prev[prev[idx]], and etc.
+Finally, we set dp[i] as max+height of block i. 
+
+Now to compute the max height, we loop through the dynamic table, and find the max value of stack ending on each possible type of block. 
+We take note of the idx of the block on top for the backtrace. An ArrayList is created so we can build store the order of the optimal stack from bottom to top. 
+A while loop is ran until prev[idx]==-1, or the bottom of the stack is reached (there is no block below). We find the block below the 
+top block by looking at prev[idx], and the block below the second highest block by looking at prev[prev[idx]], etc.
 
 The expected running time is O(n^2) where n is the number of types of blocks because of the two for loops to fill the dynamic 1D table.
 The outer loop iterates from i:0->n and the inner loop iterates from j:0->i. The sorting step is O(nlogn) which is an lower ordered term

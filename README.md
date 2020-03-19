@@ -5,6 +5,7 @@ Alex Ker
 `
 javac pset11q2.java
 `
+
 `
 java pset11q2 infile.in outfile.out
 `
