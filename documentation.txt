@@ -3,7 +3,7 @@ Alex Ker
 Documentation
 1.
 The recursion can be described as follows where dp[i] is the is the max height with the ith block as the top block
-dp[i]=(height of block i)+max_{0<=j<i}(dp[j]) if length of block j>length of block i and width of block j>length of block i
+dp[i]=(height of block i)+max_{0<=j<i}(dp[j]) if length of block j>length of block i and width of block j>width of block i
 dp[i]=(height of block i) otherwise i.e. no blocks can be stacked below block i and the max height is just the height of block i
 
 The algorithm implemented is a dynamic programming solution very similar to the longest increasing subsequence,
@@ -38,9 +38,9 @@ The outer loop iterates from i:0->n and the inner loop iterates from j:0->i. The
 compared to n^2 so it is dropped.
 
 3. 
-An interesting design decision is that the LIS problem we filled the dp table from n->0, and we could have done it also in the 
+An interesting design decision is that in the LIS problem we filled the dp table from n->0, and we could have done it also in the 
 0->n order. Similarly, dp[i] could have been the max height with the ith block as the bottom block and filled the table from n->0,
-instead of assigning dp[i] could have been the max height with the ith block as the top block and filling the table from 0->n.
+instead of assigning dp[i] to be max height with the ith block as the top block and filling the table from 0->n.
 I decided against this because I found it more intuitive to stack blocks from bottom to top, instead of top to bottom. But either should work.
 
 4. 
