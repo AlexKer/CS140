@@ -44,4 +44,5 @@ instead of assigning dp[i] to be max height with the ith block as the top block 
 I decided against this because I found it more intuitive to stack blocks from bottom to top, instead of top to bottom. But either should work.
 
 4. 
-The code was tested using the test files provided. Additionally, I printed all possible orientations for each type of block to ensure I enumerated correctly.
+The code was tested using the test files provided. 
+Additionally, I printed all possible orientations for each type of block to ensure I enumerated everything correctly.
